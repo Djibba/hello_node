@@ -37,25 +37,25 @@ if (process.env.ACTIVATE_CORS === 'true') {
 
 app.use(cors(corsOptions));
 
-/*
-let url="mongodb+srv://"+process.env.DB_USER+":"+process.env.DB_PASSWORD+"@cluster0.1faxc.mongodb.net/"+process.env.DB+"?retryWrites=true&w=majority";
+
+let url = "mongodb+srv://" + process.env.DB_USER + ":" + process.env.DB_PASSWORD + "@cluster0.jgzds.mongodb.net/" + process.env.DB + "?retryWrites=true&w=majority";
+//let url = "mongodb+srv://djibba:djibba@cluster0.jgzds.mongodb.net/hello_node?retryWrites=true&w=majority";
+
 //console.log(url);
-mongoose.connect(url,
-  { useNewUrlParser: true,useUnifiedTopology: true }
-);
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 const connection = mongoose.connection;
 connection.once("open", () => {
-  console.log("MongoDB database connection established succesfully");
+    console.log("MongoDB database connection established succesfully");
 });
-*/
+
 
 //const mongoose = require('mongoose');
 
-const connect = mongoose.connect('mongodb://localhost/hello_node', { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Connexion à MongoDB réussie !'))
-    .catch(() => console.log('Connexion à MongoDB échouée !'));
+// const connect = mongoose.connect('mongodb://localhost/hello_node', { useNewUrlParser: true, useUnifiedTopology: true })
+//     .then(() => console.log('Connexion à MongoDB réussie !'))
+//     .catch(() => console.log('Connexion à MongoDB échouée !'));
 
-module.exports = connect;
+// module.exports = connect;
 
 require('./routes')(app);
 
