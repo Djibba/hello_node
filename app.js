@@ -10,28 +10,29 @@ var mongoose = require("mongoose");
 const app = express();
 // Log requests to the console.
 app.use(logger('dev'));
-var accessLogStream = fs.createWriteStream(__dirname + process.env.LOG_PATH+'backoffice.log', {flags: 'a'})
-app.use(logger('combined',  {"stream": accessLogStream}));
+var accessLogStream = fs.createWriteStream(__dirname + process.env.LOG_PATH + 'backoffice.log', { flags: 'a' })
+app.use(logger('combined', { "stream": accessLogStream }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public'));
+app.engine('html', require('ejs').renderFile);
 
 let corsOptions = {
-  origin: '*'
+    origin: '*'
 };
 
 if (process.env.ACTIVATE_CORS === 'true') {
-  let whitelist = ['http://localhost:4200'];
+    let whitelist = ['http://localhost:4200'];
 
-  corsOptions = {
-    origin: function (origin, callback) {
-      if (whitelist.indexOf(origin) !== -1) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    }
-  };
+    corsOptions = {
+        origin: function(origin, callback) {
+            if (whitelist.indexOf(origin) !== -1) {
+                callback(null, true);
+            } else {
+                callback(new Error('Not allowed by CORS'));
+            }
+        }
+    };
 }
 
 app.use(cors(corsOptions));
@@ -48,12 +49,20 @@ connection.once("open", () => {
 });
 */
 
+//const mongoose = require('mongoose');
+
+const connect = mongoose.connect('mongodb://localhost/hello_node', { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('Connexion à MongoDB réussie !'))
+    .catch(() => console.log('Connexion à MongoDB échouée !'));
+
+module.exports = connect;
+
 require('./routes')(app);
 
 app.get('*', (req, res) =>
-  res.status(200).send({
-    message: 'Genealogy created by ouz... :( :)',
-  })
+    res.status(200).send({
+        message: 'Genealogy created by ouz... :( :)',
+    })
 );
 
 module.exports = app;

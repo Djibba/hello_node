@@ -1,17 +1,28 @@
 const multer = require('multer');
 
 const {
-  UserController, LocationController, SublocationController
+    UserController,
+    LocationController,
+    SublocationController
 } = require('./../controller');
+
+const LivreController = require('./../controller/livre');
 
 const { auth } = require('./../middlewares');
 const { auth_non_active } = require('./../middlewares');
 
 module.exports = (app) => {
-  // End Users
-  app.post('/user', UserController.create);
-  app.get('/user', auth, UserController.get);
-  app.get('/user/refresh_token', auth, UserController.refreshToken);
-  app.post('/user/verify_code', auth_non_active, UserController.verifyCode);
-  app.get('/user/init', UserController.seedUsers);
+    // End Users
+    app.post('/user', UserController.create);
+    app.get('/user', auth, UserController.get);
+    app.get('/user/refresh_token', auth, UserController.refreshToken);
+    app.post('/user/verify_code', auth_non_active, UserController.verifyCode);
+    app.get('/user/init', UserController.seedUsers);
+
+    //End Livre
+    app.post('/livre', LivreController.creerLivre);
+    app.get('/livres', LivreController.listerLivre);
+    app.get('/livre/:id', LivreController.getOneLivre);
+    app.put('/livre/edit/:id', LivreController.updateLivre);
+    app.delete('/livre/delete/:id', LivreController.deleteLivre);
 };
