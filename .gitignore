@@ -6,7 +6,6 @@ prodEnv.json
 # Edit at https://www.gitignore.io/?templates=webstorm
 
 ### Wnode_modules
-.env
 prodEnv.json
 
 
