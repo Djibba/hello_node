@@ -1,7 +1,5 @@
-const { render } = require('ejs');
 const mongoose = require('mongoose');
 let Livre = require('../models/livre.model');
-const LIVRE = mongoose.model('livre');
 
 
 
@@ -40,7 +38,7 @@ module.exports = {
      *     }
      */
 
-    async creerLivre(req, res) {
+    async createLivre(req, res) {
 
         try {
             console.log(req.body);
@@ -67,7 +65,7 @@ module.exports = {
         }
     },
 
-    async listerLivre(req, res) {
+    async showLivre(req, res) {
         Livre.find().then(data => {
             res.send(data);
         }).catch(err => {

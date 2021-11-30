@@ -20,8 +20,8 @@ module.exports = (app) => {
     app.get('/user/init', UserController.seedUsers);
 
     //End Livre
-    app.post('/livre', LivreController.creerLivre);
-    app.get('/livres', LivreController.listerLivre);
+    app.post('/livre', LivreController.createLivre);
+    app.get('/livres', LivreController.showLivre);
     app.get('/livre/:id', LivreController.getOneLivre);
     app.put('/livre/edit/:id', LivreController.updateLivre);
     app.delete('/livre/delete/:id', LivreController.deleteLivre);
