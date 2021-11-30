@@ -1,1 +1,1 @@
-web: npm run doc && node ./bin/www
+web: node ./bin/www
