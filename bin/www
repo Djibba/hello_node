@@ -27,13 +27,13 @@ const socketIO = require('socket.io');
 const io = socketIO(server);
 
 io.on('connection', (socket) => {
-  console.log('user connected');
-  io.emit('new-message', 'yooooooo');
+    console.log('user connected');
+    io.emit('new-message', 'yooooooo');
 });
 
 io.on('new-message', (message) => {
-  console.log('new message ', message);
-  io.emit(message);
+    console.log('new message ', message);
+    io.emit(message);
 });
 
 /**
@@ -41,7 +41,7 @@ io.on('new-message', (message) => {
  */
 
 server.listen(port, () => {
-  console.log('server started ', port);
+    console.log('server started ', port);
 });
 
 /**
@@ -49,17 +49,17 @@ server.listen(port, () => {
  */
 
 function normalizePort(val) {
-  let port = parseInt(val, 10);
+    let port = parseInt(val, 10);
 
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
+    if (isNaN(port)) {
+        // named pipe
+        return val;
+    }
 
-  if (port >= 0) {
-    // port number
-    return port;
-  }
+    if (port >= 0) {
+        // port number
+        return port;
+    }
 
-  return false;
+    return false;
 }
